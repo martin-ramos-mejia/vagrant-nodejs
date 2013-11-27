@@ -8,7 +8,7 @@ class nodejs {
     command => '/usr/bin/apt-get install -y python-software-properties python g++ make',
   }
 
-  exec { 'add-apt-repository -y ppa:chris-lea/node.js':
+  exec { 'add external repository':
     command => '/usr/bin/add-apt-repository -y ppa:chris-lea/node.js',
   }
 
