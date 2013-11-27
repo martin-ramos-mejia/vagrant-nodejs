@@ -1,15 +1,16 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+VAGRANTFILE_API_VERSION = "2"
 
-Vagrant::Config.run do |config|
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu1204-puppetlabs"
+  config.vm.box = "Puppetlabs_Ubuntu_12_04"        
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210-nocm.box"
-  '''
+  config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box"  
+
   config.vm.provider :virtualbox do |vb, override|
     vb.customize ["modifyvm", :id, "--memory", "1024"]
   end
@@ -24,13 +25,11 @@ Vagrant::Config.run do |config|
     rs.image = /Ubuntu/
     rs.public_key_path = "my_custom_key.pub"
   end
-  
+
   config.vm.provision :puppet do |puppet|
-    puppet.options = "--verbose --debug"
-    puppet.facter = { "esversion" => "0.90.3", "seeds" => seeds }
-    puppet.module_path = "puppet/modules"
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "elasticsearchnode.pp"
+     puppet.manifests_path = "manifests"
+     puppet.manifest_file = "base-nodejs.pp"
+     puppet.module_path = "modules"
   end
-  '''
+
 end
