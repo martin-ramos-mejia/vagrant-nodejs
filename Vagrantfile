@@ -17,14 +17,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider :rackspace do |rs, override|
     override.vm.box = "dummy"
-    override.ssh.private_key_path = "/home/myuser/.ssh/id_rsa_my_private_key"
 
     rs.username = "YOUR USERNAME"
     rs.api_key = "YOUR API KEY"
     rs.flavor = /1GB/
     rs.image = /Ubuntu/
-    rs.public_key_path = "my_custom_key.pub"
-  end
+    rs.public_key_path = "/path/to/my/custom_key.pub"
+ end
+
 
   config.vm.provision :puppet do |puppet|
      puppet.manifests_path = "manifests"
