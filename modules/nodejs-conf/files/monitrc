@@ -1,0 +1,10 @@
+#!monit
+set logfile /var/log/monit.log
+
+check process nodejs with pidfile "/var/run/test.pid"
+    start program = "/sbin/start test"
+    stop program  = "/sbin/stop test"
+    if failed port 80 protocol HTTP
+        request /
+        with timeout 5 seconds
+        then restart
